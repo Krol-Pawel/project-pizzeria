@@ -104,10 +104,10 @@
         /* prevent default action for event */
         event.preventDefault();
         /* find active product (product that has active class) */
-        const activeProduct = thisProduct.element.querySelector('.product.active')
+        const activeProduct = select.all.menuProductsActive
         console.log(activeProduct)
         /* if there is active product and it's not thisProduct.element, remove class active from it */
-        if(activeProduct){ activeProduct!= 0 && activeProduct!=thisProduct.element, activeProduct.classList.remove('active')}
+        if(activeProduct!= 0 && activeProduct!=thisProduct.element) {activeProduct.classList.remove('active')}
         /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle('active')
       });
@@ -115,7 +115,23 @@
 
     initOrderForm(){
     const thisProduct = this;
+    thisProduct.form.addEventListener('submit', function(event){
+      event.preventDefault();
+      thisProduct.processOrder();
+    });
+    
+    for(let input of thisProduct.formInputs){
+      input.addEventListener('change', function(){
+        thisProduct.processOrder();
+      });
+    }
+    
+    thisProduct.cartButton.addEventListener('click', function(event){
+      event.preventDefault();
+      thisProduct.processOrder();
+    });
     console.log('initOrderForm')
+
     }
 
     processOrder(){
