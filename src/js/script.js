@@ -59,10 +59,12 @@
       thisProduct.id = id;
       thisProduct.data = data;
       
-      thisProduct.initAccordion();
       thisProduct.renderInMenu();
+      thisProduct.getElements();
       thisProduct.initAccordion();
-      // thisProduct.getElements();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
+
 
       console.log('new Product:', thisProduct);
     }
@@ -79,38 +81,51 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
-    // getElements(){
-    //   const thisProduct = this;
+    getElements(){
+      const thisProduct = this;
 
-    //   thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-    //   thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-    //   thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-    //   thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-    //   thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
 
 
-    // }
+    }
 
     initAccordion(){
       const thisProduct = this;
 
       /* find the clickable trigger (the element that should react to clicking) */
-      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable)
-
+      // const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable)
+      // console.log(clickableTrigger)
       /* START: add event listener to clickable trigger on event click */
-      clickableTrigger.addEventListener('click', function(event) {
+      thisProduct.accordionTrigger.addEventListener('click', function(event) {
         /* prevent default action for event */
         event.preventDefault();
         /* find active product (product that has active class) */
-        const activeProduct = menuProduct.querySelectorAll(clickableTrigger)
+        const activeProduct = thisProduct.element.querySelector('.product.active')
         console.log(activeProduct)
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         if(activeProduct){ activeProduct!= 0 && activeProduct!=thisProduct.element, activeProduct.classList.remove('active')}
         /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle('active')
-    });
+      });
+    }
+
+    initOrderForm(){
+    const thisProduct = this;
+    console.log('initOrderForm')
+    }
+
+    processOrder(){
+    const thisProduct = this;
+    console.log('processOrder')
+    }
+  
+
   }
-}
+
 
   const app = {
     initMenu: function(){
