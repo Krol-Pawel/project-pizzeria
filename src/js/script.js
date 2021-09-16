@@ -63,8 +63,8 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
-
 
       console.log('new Product:', thisProduct);
     }
@@ -89,8 +89,8 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-
-
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
 
     initAccordion(){
@@ -161,9 +161,10 @@
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionID];
           console.log(optionID, option);
+          const optionSelected = formData[paramID] && formData[paramID].includes(optionID);
 
           // check if there is param with a name of paramId in formData and if it includes optionId
-          if(formData[paramID] && formData[paramID].includes(optionID)) {
+          if(optionSelected) {
             // check if the option is not default
             if(!option.default == true){
             // add option price to price variable
@@ -176,6 +177,22 @@
               price -= option.price;
             }
           }
+          console.log(paramID);
+          console.log(optionID)
+          console.log(option)
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramID + '-' + optionID);
+          console.log(optionImage);
+          if(optionImage){
+            //yes! we've found it!
+            if(optionSelected){
+              optionImage.classList.add(classNames.menuProduct.imageVisible)
+            }
+            else{
+              optionImage.classList.remove(classNames.menuProduct.imageVisible)
+            }
+          }
+
+
         }
     }
 
@@ -185,9 +202,33 @@
     console.log(price)
     }
   
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+
+    }
 
   }
 
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+
+      thisWidget.getElements(element);
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor arguments:', element);
+    }
+
+    getElements(element){
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+  }
 
   const app = {
     initMenu: function(){
