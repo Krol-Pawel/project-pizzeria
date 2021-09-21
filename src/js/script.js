@@ -449,29 +449,32 @@
         thisCart.totalNumber += product.amount;
 
         thisCart.subtotalPrice += product.price;
-      
+      }
 
-        if(thisCart.totalNumber!==0) {
-          thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
-          // thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-        }
-
-        else{
-          thisCart.totalPrice = 0;
-          // thisCart.dom.deliveryFee.innerHTML = 0;
-          // thisCart.dom.subtotalPrice.innerHTML = 0;
-
-        }
-
-        for(let selector of thisCart.dom.totalPrice){
-          selector.innerHTML = thisCart.totalPrice;
-        }
-
-        thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-        thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-        // thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      if(thisCart.totalNumber!==0) {
+        thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
         thisCart.dom.deliveryFee.innerHTML = deliveryFee;
       }
+
+      else{
+        thisCart.totalPrice = 0;
+        thisCart.dom.deliveryFee.innerHTML = 0;
+        // thisCart.dom.subtotalPrice.innerHTML = 0;
+
+      }
+      
+      for(let selector of thisCart.dom.totalPrice){
+        selector.innerHTML = thisCart.totalPrice;
+      }
+      
+      // thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+      // thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      // thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      
+      thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+      
+      // thisCart.dom.deliveryFee.innerHTML = deliveryFee;
 
       console.log(deliveryFee);
       console.log(thisCart.totalNumber);
@@ -489,7 +492,7 @@
       console.log('indexOfProduct:', indexOfProduct);
       const thisCartProductLength = thisCart.products.length;
       console.log('thisCartProduct.length:', thisCartProductLength);
-      thisCart.products.splice(indexOfProduct, 4);
+      thisCart.products.splice(indexOfProduct, 1);
       //call the 'update' method to refresh totals after removing the product
       thisCart.update();
     }
