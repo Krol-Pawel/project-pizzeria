@@ -37,8 +37,8 @@ export const select = {
       wrapper: '.hour-picker',
       input: 'input[type="range"]',
       output: '.output',
-      },
     },
+  },
   booking: {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
