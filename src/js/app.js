@@ -2,7 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Products.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
-//import Home from './components/Home.js';
+import Home from './components/Home.js';
 
 const app = {
   initPages: function(){
@@ -79,6 +79,20 @@ const app = {
     ////console.log('testProduct:', testProduct);
   },
 
+  initHome: function(){
+    const thisApp = this;
+    
+    const homeSection = document.querySelector(select.containerOf.home);
+    thisApp.home = new Home(homeSection);
+  },
+
+  initBooking: function(){
+    const thisApp = this;
+
+    const containerOfWidget = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(containerOfWidget);
+  },
+
   initData: function(){
     const thisApp = this;
 
@@ -108,12 +122,14 @@ const app = {
     //console.log('classNames:', classNames);
     //console.log('settings:', settings);
     //console.log('templates:', templates);
-
-    thisApp.initData();
-    // thisApp.initMenu();
-    thisApp.initCart();
+    thisApp.initHome();
     thisApp.initPages();
+    thisApp.initData();
     thisApp.initBooking();
+
+    
+    // thisApp.initMenu();
+    
   },
 
   initCart: function(){
@@ -129,14 +145,11 @@ const app = {
     });
 
   },
-
-  initBooking: function(){
-    const thisApp = this;
-
-    const containerOfWidget = document.querySelector(select.containerOf.booking);
-    thisApp.booking = new Booking(containerOfWidget);
-  }
+  
 };  
 
 app.init();
+app.initCart();
+
+export default app;
 
