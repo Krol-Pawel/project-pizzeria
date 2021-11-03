@@ -47,6 +47,7 @@ export const select = {
     tables: '.floor-plan .table',
     form: '.booking-form',
     starters: '[name="starter"]',
+    floorPlan: '.floor-plan',
   },
   home: {
     options: '.options a',

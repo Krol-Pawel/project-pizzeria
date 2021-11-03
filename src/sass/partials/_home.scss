@@ -1,22 +1,23 @@
 .home-container{
-  margin: ($base-size * 3.5) auto;
-  padding: ($base-size * 6) ($base-size * 4);
+  margin: ($base-size * 2.5) auto;
+  width: 100%;
+  padding: ($base-size * 3) ($base-size * 2);
   background: $color-light;
   border-bottom: 2px solid lighten($color-dark, 55%);
   border-radius: $radius;
 }
 
 .order-online {
-  width: 290px;
+  width: 140px;
   height: 115px;
-  flex: 45%;
+  flex: 40%;
   background-image: url("./../../images/carousel/pizza-1.jpg");
 }
 
 .book-table {
-  width: 290px;
+  width: 140px;
   height: 115px;
-  flex: 45%;
+  flex: 40%;
   background-image: url("./../../images/carousel/pizza-2.jpg");
 }
 
@@ -74,22 +75,23 @@
   text-align: center;
   color: $color-light;
   font-family: $font-header;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 /* Carousel */
 
 .carousel {
-  height: 250px;
-  margin-left: 200px;
+  height: 300px;
+  margin-left: 60px;
+  margin-right: 60px;
 }
 
 .carousel-image img {
-  width: 275px;
+  width: 200px;
   height: 275px;
   object-fit: cover;
-  margin-right: 30px;
+  margin-right: 10px;
   border-radius: 5px;
 }
 
@@ -103,6 +105,7 @@
 .carousel-text {
   h3 {
     margin-bottom: -20px;
+    font-size: 21px;
   }
 
   p{

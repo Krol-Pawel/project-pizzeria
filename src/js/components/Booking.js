@@ -173,8 +173,7 @@ class Booking{
     thisBooking.dom.tables = element.querySelectorAll(select.booking.tables);
 
     thisBooking.dom.form = element.querySelector(select.booking.form);
-    //thisBooking.dom.formTableSubmit = element.querySelector(select.booking.formSubmit);
-    //thisBooking.dom.reservationTable = element.querySelector('floor-plan')
+    thisBooking.dom.floorPlan = element.querySelector(select.booking.floorPlan);
     thisBooking.dom.address = element.querySelector(select.cart.address);
     thisBooking.dom.phone = element.querySelector(select.cart.phone);
     thisBooking.dom.starters = element.querySelectorAll(select.booking.starters);
@@ -195,12 +194,8 @@ class Booking{
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
+      thisBooking.removeSelected();
     });
-
-    // thisBooking.dom.wrapper.addEventListener('click', function(){
-    //   thisBooking.initTables();
-    //   console.log('thisBooking.dom.tables', thisBooking.dom.tables);
-    // });
 
     thisBooking.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -212,23 +207,36 @@ class Booking{
   initTables(){
     const thisBooking = this;
 
-    for (let table of thisBooking.dom.tables){
-      table.addEventListener('click', function (event){
-        event.preventDefault();
-        if (table.classList.contains('booked')){
-          alert('choose a new table, this one is already booked');
-        } else {
-          const tableNumber = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
-          thisBooking.clickedTable === tableNumber;
-          if (thisBooking.clickedTable){
-            thisBooking.removeSelected();
-          } else {
-            table.classList.add(classNames.booking.tableSelected);
-            thisBooking.clickedTable = tableNumber;
-          }
+    thisBooking.dom.floorPlan.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      const clicked = event.target;
+      thisBooking.tableRef = clicked.getAttribute(settings.booking.tableIdAttribute);
+      // zeby sprawdzic czy kliknieto w stolik
+      if (thisBooking.tableRef) {
+        // ustawienie clickedTable w this/thisBooking
+        thisBooking.clickedTable = parseInt(thisBooking.tableRef);
+        // te warunki na sprawdzanie klasy bedziemy reuzywac, wiec zeby nie powtarzac i poprawic czytelnosc, warto wyciągnąć to do zmiennych
+        const isTableBooked = clicked.classList.contains(classNames.booking.tableBooked);
+        const isTableSelected = clicked.classList.contains(classNames.booking.tableSelected);
+        // stol niezabookowany i niewybrany wczesniej (np pierwsze klikniecie danego stolika)
+        // gdyby nie zmienne powyzej, warunek wyglądałby tak:
+        // if (!clicked.classList.contains(classNames.booking.tableBooked) && ! clicked.classList.contains(classNames.booking.tableSelected);) {
+        if (!isTableBooked && !isTableSelected) {
+          thisBooking.removeSelected();
+          clicked.classList.add(classNames.booking.tableSelected);
+          thisBooking.tableNumber = thisBooking.tableSelected;
         }
-      });
-    }
+        // stol niezabookowany ale wybrany wczesniej (np drugie klikniecie danego stolika) - usuwany bezowy kolor
+        else if (!isTableBooked && isTableSelected) {
+          thisBooking.removeSelected();
+        }
+        // stol zabookowany - alert
+        else if (isTableBooked) {
+          alert('choose a new table, this one is already booked');
+        }
+      }
+    });
   }
 
   removeSelected(){

@@ -4,7 +4,7 @@ import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
 import Home from './components/Home.js';
 
-const app = {
+export const app = {
   initPages: function(){
     const thisApp = this;
 
@@ -84,6 +84,7 @@ const app = {
     
     const homeSection = document.querySelector(select.containerOf.home);
     thisApp.home = new Home(homeSection);
+
   },
 
   initBooking: function(){
@@ -122,10 +123,10 @@ const app = {
     //console.log('classNames:', classNames);
     //console.log('settings:', settings);
     //console.log('templates:', templates);
-    thisApp.initHome();
     thisApp.initPages();
     thisApp.initData();
     thisApp.initBooking();
+    thisApp.initHome();
 
     
     // thisApp.initMenu();
@@ -151,5 +152,4 @@ const app = {
 app.init();
 app.initCart();
 
-export default app;
 
