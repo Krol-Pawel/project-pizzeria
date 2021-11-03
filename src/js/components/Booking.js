@@ -212,26 +212,18 @@ class Booking{
 
       const clicked = event.target;
       thisBooking.tableRef = clicked.getAttribute(settings.booking.tableIdAttribute);
-      // zeby sprawdzic czy kliknieto w stolik
       if (thisBooking.tableRef) {
-        // ustawienie clickedTable w this/thisBooking
         thisBooking.clickedTable = parseInt(thisBooking.tableRef);
-        // te warunki na sprawdzanie klasy bedziemy reuzywac, wiec zeby nie powtarzac i poprawic czytelnosc, warto wyciągnąć to do zmiennych
         const isTableBooked = clicked.classList.contains(classNames.booking.tableBooked);
         const isTableSelected = clicked.classList.contains(classNames.booking.tableSelected);
-        // stol niezabookowany i niewybrany wczesniej (np pierwsze klikniecie danego stolika)
-        // gdyby nie zmienne powyzej, warunek wyglądałby tak:
-        // if (!clicked.classList.contains(classNames.booking.tableBooked) && ! clicked.classList.contains(classNames.booking.tableSelected);) {
         if (!isTableBooked && !isTableSelected) {
           thisBooking.removeSelected();
           clicked.classList.add(classNames.booking.tableSelected);
           thisBooking.tableNumber = thisBooking.tableSelected;
         }
-        // stol niezabookowany ale wybrany wczesniej (np drugie klikniecie danego stolika) - usuwany bezowy kolor
         else if (!isTableBooked && isTableSelected) {
           thisBooking.removeSelected();
         }
-        // stol zabookowany - alert
         else if (isTableBooked) {
           alert('choose a new table, this one is already booked');
         }
