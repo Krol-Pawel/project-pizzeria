@@ -234,7 +234,7 @@ class Booking{
 
   removeSelected(){
     const thisBooking = this;
-    thisBooking.tableNumber = null
+    thisBooking.tableNumber = null;
     const clickedTables = document.querySelectorAll('.selected');
     for( let clicked of clickedTables){
       clicked.classList.remove(classNames.booking.tableSelected);
