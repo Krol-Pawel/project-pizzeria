@@ -219,7 +219,7 @@ class Booking{
         if (!isTableBooked && !isTableSelected) {
           thisBooking.removeSelected();
           clicked.classList.add(classNames.booking.tableSelected);
-          thisBooking.tableNumber = thisBooking.tableSelected;
+          thisBooking.tableNumber = thisBooking.clickedTable;
         }
         else if (!isTableBooked && isTableSelected) {
           thisBooking.removeSelected();

@@ -1,6 +1,6 @@
 /*global Flickity */
 import {templates, select} from '../settings.js';
-// import {app} from '../App.js';
+import {app} from '../app.js';
 
 
 class Home {
@@ -9,7 +9,7 @@ class Home {
 
     thisHome.render(element);
     thisHome.initWidgets();
-    // thisHome.jumpToSubpage();
+    thisHome.jumpToSubpage();
   }
 
 
@@ -42,17 +42,17 @@ class Home {
     }, 2000);
   }
 
-  // jumpToSubpage() {
-  //   const thisHome = this;
+  jumpToSubpage() {
+    const thisHome = this;
 
-  //   thisHome.dom.order.addEventListener('click', function(){
-  //     app.activatePage('order');
-  //   });
+    thisHome.dom.order.addEventListener('click', function(){
+      app.activatePage('order');
+    });
 
-  //   thisHome.dom.book.addEventListener('click', function(){
-  //     app.activatePage('booking');
-  //   });
-  // }
+    thisHome.dom.book.addEventListener('click', function(){
+      app.activatePage('booking');
+    });
+  }
 }
 
 export default Home;
