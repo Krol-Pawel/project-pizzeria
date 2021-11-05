@@ -10,7 +10,7 @@ class Booking{
 
     // thisBooking.tableSelected = [];
     // thisBooking.element = element;
-
+    thisBooking.tableNumber = null;
 
     thisBooking.render(element);
     thisBooking.initWidgets();
@@ -220,6 +220,7 @@ class Booking{
           thisBooking.removeSelected();
           clicked.classList.add(classNames.booking.tableSelected);
           thisBooking.tableNumber = thisBooking.clickedTable;
+          console.log(thisBooking.tableNumber, thisBooking.clickedTable);
         }
         else if (!isTableBooked && isTableSelected) {
           thisBooking.removeSelected();
@@ -233,20 +234,22 @@ class Booking{
 
   removeSelected(){
     const thisBooking = this;
+    thisBooking.tableNumber = null
     const clickedTables = document.querySelectorAll('.selected');
     for( let clicked of clickedTables){
       clicked.classList.remove(classNames.booking.tableSelected);
     }
-    delete thisBooking.clickedTable;
+    // delete thisBooking.clickedTable;
   }
 
   sendBooking(){
     const thisBooking = this;
     const url = settings.db.url + '/' + settings.db.booking;
+    console.log('thisBooking:', thisBooking);
     const finalBooking = {
       date: thisBooking.datePicker.value, 
       hour: thisBooking.hourPicker.value,
-      table: thisBooking.selectedTable,
+      table: thisBooking.tableNumber,
       duration: parseInt(thisBooking.peopleAmount.value), 
       ppl: parseInt(thisBooking.hoursAmount.value),
       starters: [],
