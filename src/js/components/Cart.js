@@ -10,8 +10,6 @@ class Cart{
 
     thisCart.getElements(element);
     thisCart.initActions();
-
-    //console.log('new Cart', thisCart);
   }
 
   getElements(element){
@@ -58,15 +56,9 @@ class Cart{
     const thisCart = this;
 
     const generatedHTML = templates.cartProduct(menuProduct);
-    //console.log(generatedHTML);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-    //console.log(generatedDOM);
     thisCart.dom.productList.appendChild(generatedDOM);
-
-
-    //console.log('adding product', menuProduct);
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-    //console.log('thisCart.products', thisCart.products);
     thisCart.update();
   }
 
@@ -94,22 +86,13 @@ class Cart{
     else{
       thisCart.totalPrice = 0;
       thisCart.dom.deliveryFee.innerHTML = 0;
-      // thisCart.dom.subtotalPrice.innerHTML = 0;
-
     }
     
     for(let selector of thisCart.dom.totalPrice){
       selector.innerHTML = thisCart.totalPrice;
     }
-    
-    // thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-    // thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
-    // thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-    
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-    
-    // thisCart.dom.deliveryFee.innerHTML = deliveryFee;
 
     console.log(deliveryFee);
     console.log(thisCart.totalNumber);
@@ -120,15 +103,12 @@ class Cart{
 
   remove(thisCartProduct){
     const thisCart = this;
-    //delete representation of product from HTML 
     thisCartProduct.dom.wrapper.remove();
-    //delete information about product from the table {thisCart.products}
     const indexOfProduct = thisCart.products.indexOf(thisCartProduct);
     console.log('indexOfProduct:', indexOfProduct);
     const thisCartProductLength = thisCart.products.length;
     console.log('thisCartProduct.length:', thisCartProductLength);
     thisCart.products.splice(indexOfProduct, 1);
-    //call the 'update' method to refresh totals after removing the product
     thisCart.update();
   }
 

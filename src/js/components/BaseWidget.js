@@ -19,10 +19,7 @@ class BaseWidget{
     const thisWidget = this;
     
     const newValue = thisWidget.parseValue(value);
-    
-    /*TODO: add validation */
-    //console.log(settings.amountWidget.defaultMin);
-    //console.log(settings.amountWidget.defaultMax);
+  
     if(thisWidget.correctValue !== newValue && thisWidget.isValid(newValue)) {
       thisWidget.correctValue = newValue;
       thisWidget.announce();

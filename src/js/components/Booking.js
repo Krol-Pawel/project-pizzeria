@@ -8,8 +8,7 @@ class Booking{
   constructor(element){
     const thisBooking = this;
 
-    // thisBooking.tableSelected = [];
-    // thisBooking.element = element;
+
     thisBooking.tableNumber = null;
 
     thisBooking.render(element);
@@ -65,9 +64,6 @@ class Booking{
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        // console.log(bookings);
-        // console.log(eventsCurrent);
-        // console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -97,7 +93,6 @@ class Booking{
       }
     }
 
-    //console.log('thisBooking.booked', thisBooking.booked);
 
     thisBooking.updateDOM();
   }
@@ -114,7 +109,6 @@ class Booking{
 
 
     for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock+= 0.5){
-      //console.log('loop', hourBlock);
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
       }
@@ -239,7 +233,6 @@ class Booking{
     for( let clicked of clickedTables){
       clicked.classList.remove(classNames.booking.tableSelected);
     }
-    // delete thisBooking.clickedTable;
   }
 
   sendBooking(){

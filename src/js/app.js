@@ -12,7 +12,6 @@ export const app = {
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
     const idFromHash = window.location.hash.replace('#/', '');
-    //console.log('idFromHash', idFromHash);
 
     let pageMatchingHash = thisApp.pages[0].id;
 
@@ -29,14 +28,8 @@ export const app = {
       link.addEventListener('click', function(event){
         const clickedElement = this;
         event.preventDefault();
-
-        // get page id from href attribute
         const id = clickedElement.getAttribute('href').replace('#', '');
-        // run thisApp.activatePage with that ID
-
         thisApp.activatePage(id);
-
-        // change url hash
         window.location.hash = '#/' + id;
       });
     }
@@ -45,18 +38,10 @@ export const app = {
   activatePage: function(pageID){
     const thisApp = this;
 
-    //add class 'active' to matching pages, remove from non-matching
     for(let page of thisApp.pages){
-      // if(page.id == pageID){
-      //   page.classList.add(classNames.pages.active);
-      // } else {
-      //   page.classList.remove(classNames.pages.active);
-      // }
       page.classList.toggle(classNames.pages.active, page.id == pageID);
     }
-    
-    //add class 'active' to matching LINKS, remove from non-matching
-    
+        
     for(let link of thisApp.navLinks){
       link.classList.toggle(
         classNames.nav.active, 
@@ -97,7 +82,6 @@ export const app = {
   initData: function(){
     const thisApp = this;
 
-    //przez API zmiana z thisApp.data = dataSource na pusty obiekt
     thisApp.data = {};
     const url = settings.db.url + '/' + settings.db.products;
 
@@ -108,9 +92,7 @@ export const app = {
       .then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
 
-        /* save parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
-        /* execute initMenu method */
         thisApp.initMenu();
       });
     console.log('thisApp.data', JSON.stringify(thisApp.data));
@@ -118,19 +100,10 @@ export const app = {
 
   init: function(){
     const thisApp = this;
-    //console.log('*** App starting ***');
-    //console.log('thisApp:', thisApp);
-    //console.log('classNames:', classNames);
-    //console.log('settings:', settings);
-    //console.log('templates:', templates);
     thisApp.initPages();
     thisApp.initData();
     thisApp.initBooking();
-    thisApp.initHome();
-
-    
-    // thisApp.initMenu();
-    
+    thisApp.initHome();    
   },
 
   initCart: function(){

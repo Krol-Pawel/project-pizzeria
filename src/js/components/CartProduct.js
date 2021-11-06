@@ -36,9 +36,7 @@ class CartProduct{
     thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
     thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
       thisCartProduct.amount = thisCartProduct.amountWidget.value;
-      //console.log(thisCartProduct.amount);
       thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
-      //console.log(thisCartProduct.price);
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
     });
 
